@@ -1,0 +1,33 @@
+# R session files
+.Rhistory
+.Rapp.history
+.RData
+.Ruserdata
+
+# RStudio project files
+.Rproj.user/
+*.Rproj
+
+# R package and build artifacts
+.Rbuildignore
+*.Rcheck/
+*.tar.gz
+
+# renv local state
+renv/library/
+renv/staging/
+renv/python/
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Shiny deployment metadata
+rsconnect/
