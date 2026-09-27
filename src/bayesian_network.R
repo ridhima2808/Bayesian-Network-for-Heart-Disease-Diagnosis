@@ -81,7 +81,8 @@ learn_discretization <- function(data, columns, bins = 3L) {
 
     list(
       breaks = c(-Inf, internal_breaks, Inf),
-      labels = c("low", "medium", "high")
+      labels = c("low", "medium", "high"),
+      training_range = range(values)
     )
   })
   names(specifications) <- columns
@@ -357,6 +358,7 @@ model_bundle <- list(
   hc_tabu_structural_hamming_distance = bnlearn::shd(hc_network, tabu_network),
   discretization = discretization,
   training_columns = node_names,
+  node_levels = lapply(bn_train, levels),
   target_levels = levels(bn_train$target),
   random_seed = random_seed,
   equivalent_sample_size = equivalent_sample_size
