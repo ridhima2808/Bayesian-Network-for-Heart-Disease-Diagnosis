@@ -1,0 +1,4 @@
+"model","structure","bde_score","arc_count","selected_for_inference"
+"hill_climbing","data-driven",-2968.72873301643,13,FALSE
+"tabu","data-driven",-2968.72873301643,13,TRUE
+"expert","expert-defined",-3013.32496987882,18,FALSE

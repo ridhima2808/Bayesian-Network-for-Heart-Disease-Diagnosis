@@ -58,6 +58,10 @@ model_bundle <- load_bayesian_model(model_path)
 
 inference_particles <- 15000L
 inference_seed <- 509L
+numeric_input_ranges <- lapply(
+  model_bundle$discretization,
+  function(specification) specification$training_range
+)
 
 factor_labels <- c(
   age = "Age",
@@ -94,16 +98,9 @@ patient_from_input <- function(input) {
 }
 
 validate_patient_ranges <- function(patient) {
-  numeric_ranges <- list(
-    age = c(29, 77),
-    trestbps = c(94, 200),
-    chol = c(126, 564),
-    thalach = c(71, 202),
-    oldpeak = c(0, 6.2)
-  )
-  for (column_name in names(numeric_ranges)) {
+  for (column_name in names(numeric_input_ranges)) {
     value <- patient[[column_name]]
-    allowed_range <- numeric_ranges[[column_name]]
+    allowed_range <- numeric_input_ranges[[column_name]]
     if (length(value) != 1L || is.na(value) || !is.finite(value) ||
         value < allowed_range[[1L]] || value > allowed_range[[2L]]) {
       stop(
@@ -220,7 +217,12 @@ ui <- shiny::fluidPage(
     shiny::sidebarPanel(
       width = 4,
       shiny::h3("Patient information"),
-      shiny::numericInput("age", "Age (years)", value = 54, min = 29, max = 77, step = 1),
+      shiny::numericInput(
+        "age", "Age (years)", value = 54,
+        min = numeric_input_ranges$age[[1L]],
+        max = numeric_input_ranges$age[[2L]],
+        step = 1
+      ),
       shiny::selectInput(
         "sex", "Sex",
         choices = c("Female" = "0", "Male" = "1"),
@@ -238,11 +240,17 @@ ui <- shiny::fluidPage(
       ),
       shiny::numericInput(
         "trestbps", "Resting blood pressure (mm Hg)",
-        value = 130, min = 94, max = 200, step = 1
+        value = 130,
+        min = numeric_input_ranges$trestbps[[1L]],
+        max = numeric_input_ranges$trestbps[[2L]],
+        step = 1
       ),
       shiny::numericInput(
         "chol", "Serum cholesterol (mg/dL)",
-        value = 246, min = 126, max = 564, step = 1
+        value = 246,
+        min = numeric_input_ranges$chol[[1L]],
+        max = numeric_input_ranges$chol[[2L]],
+        step = 1
       ),
       shiny::selectInput(
         "fbs", "Fasting blood sugar",
@@ -258,7 +266,10 @@ ui <- shiny::fluidPage(
       ),
       shiny::numericInput(
         "thalach", "Maximum heart rate achieved",
-        value = 150, min = 71, max = 202, step = 1
+        value = 150,
+        min = numeric_input_ranges$thalach[[1L]],
+        max = numeric_input_ranges$thalach[[2L]],
+        step = 1
       ),
       shiny::selectInput(
         "exang", "Exercise-induced angina",
@@ -266,7 +277,10 @@ ui <- shiny::fluidPage(
       ),
       shiny::numericInput(
         "oldpeak", "Exercise-induced ST depression",
-        value = 1, min = 0, max = 6.2, step = 0.1
+        value = 1,
+        min = numeric_input_ranges$oldpeak[[1L]],
+        max = numeric_input_ranges$oldpeak[[2L]],
+        step = 0.1
       ),
       shiny::selectInput(
         "slope", "Peak ST-segment slope",

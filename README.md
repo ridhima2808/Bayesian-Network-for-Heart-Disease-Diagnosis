@@ -135,7 +135,8 @@ All model comparisons use the same held-out test rows and a classification thres
 │   ├── models/                     # Generated fitted models and metadata
 │   ├── inference/                  # Generated worked-example probabilities
 │   └── evaluation/                 # Generated metrics and comparison plots
-└── report/                         # Short project findings and notes
+└── report/
+    └── notes.md                    # Short project findings and limitations
 ```
 
 Generated directories appear after their corresponding scripts run.

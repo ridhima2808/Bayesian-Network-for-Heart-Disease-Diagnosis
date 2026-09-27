@@ -1,0 +1,13 @@
+"model","actual","predicted","count"
+"Bayesian network","0","0",14
+"Bayesian network","1","0",2
+"Bayesian network","0","1",14
+"Bayesian network","1","1",31
+"Logistic regression","0","0",24
+"Logistic regression","1","0",8
+"Logistic regression","0","1",4
+"Logistic regression","1","1",25
+"Decision tree","0","0",23
+"Decision tree","1","0",7
+"Decision tree","0","1",5
+"Decision tree","1","1",26

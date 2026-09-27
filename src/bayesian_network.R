@@ -274,7 +274,7 @@ tabu_network <- bnlearn::tabu(
   iss = equivalent_sample_size,
   blacklist = target_blacklist,
   tabu = 10,
-  max.tabu = 100
+  max.tabu = 10
 )
 
 expert_network <- build_expert_network(node_names)
